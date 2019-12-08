@@ -1,0 +1,22 @@
+Aufgaben und Beispiele für die Vorlesung "Verteilte Systeme (ab 2020)"
+======================================================================
+
+Kurzbeschreibung
+----------------
+
+Dieses Repository beinhaltet sämtliche Aufgabenblätter, Übungsaufgaben und
+Beispielprojekte für die Vorlesung „Verteilte Systeme” (ab Studienjahr 2020)
+im Studiengang Wirtschaftsinformatik an der DHBW Karlsruhe.
+
+Bisher gibt es hier noch keine Inhalte. Sie folgen aber bald.
+
+Copyright
+---------
+
+Sämtliche Quellcodes sind lizenziert unter
+[_Creative Commons Namensnennung 4.0 International_](http://creativecommons.org/licenses/by/4.0/)
+
+© 2019 Dennis Schulmeister-Zimolong im Auftrag der DHBW Karlsruhe <br/>
+
+E-Mail: [dhbw@windows3.de](mailto:dhbw@windows3.de) <br/>
+Webseite: https://www.wpvs.de
