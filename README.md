@@ -6,9 +6,14 @@ Kurzbeschreibung
 
 Dieses Repository beinhaltet sämtliche Aufgabenblätter, Übungsaufgaben und
 Beispielprojekte für die Vorlesung „Verteilte Systeme” (ab Studienjahr 2020)
-im Studiengang Wirtschaftsinformatik an der DHBW Karlsruhe.
+im Studiengang Wirtschaftsinformatik an der DHBW Karlsruhe. Das Repository ist
+in folgende Bereiche gegliedert, analog zu den Vorlesungsfolien:
 
-Bisher gibt es hier noch keine Inhalte. Sie folgen aber bald.
+ * Bisher gibt es hier noch keine Inhalte. Sie folgen aber bald.
+
+Einige der Quellcodes sind in einem Aufgabenblatt beschrieben. Die dazugehörigen
+Aufgabenblätter befinden sich im Repository
+[dhbwka-wwi-vertsys-2020-aufgaben](https://github.com/DennisSchulmeister/dhbwka-wwi-vertsys-2020-aufgaben).
 
 Copyright
 ---------
