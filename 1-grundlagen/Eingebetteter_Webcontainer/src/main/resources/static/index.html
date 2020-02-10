@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hallo Embedded Java Webcontainer</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h2>Embedded Java Webcontainer</h2>
+        <p>
+            Ist das nicht cool? Dieses HTML wird von einem Web Container
+            ausgeliefert, der in eine Java-Anwendung eingebettet wurde.
+        </p>
+        <p>
+            Mit Jetty als Embedded Web Container ist so einiges möglich,
+            aber es kann natürlich schnell kompliziert werden. Darum haben
+            wir uns hier auf eine einfache Lösung mit statischen HTML-Dateien
+            und Servlets beschränkt. JSP, JAX-WS könnte man sicher auch
+            irgendwie zum Laufen bringen, das ist mir aber zu kompliziert. :-)
+        </p>
+        <p>
+            Ein einfaches Servlet geht aber: <a href="/hello">HelloServlet</a>
+        </p>
+        <p>
+            Und hier ein Servlet, das ein Template zur HTML-Erzeugung nutzt: <a href="/template">TemplateServlet</a>
+        </p>
+    </body>
+</html>

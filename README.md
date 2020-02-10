@@ -9,7 +9,10 @@ Beispielprojekte für die Vorlesung „Verteilte Systeme” (ab Studienjahr 2020
 im Studiengang Wirtschaftsinformatik an der DHBW Karlsruhe. Das Repository ist
 in folgende Bereiche gegliedert, analog zu den Vorlesungsfolien:
 
- * Bisher gibt es hier noch keine Inhalte. Sie folgen aber bald.
+ * **1-grundlagen:** Grundlagen verteilter Systeme
+ * **2-restapi:** REST API-Entwicklung
+ * **3-microservices:** Microservice-Architekturmuster
+ * **4-pubsub:** Publish/Subscribe
 
 Einige der Quellcodes sind in einem Aufgabenblatt beschrieben. Die dazugehörigen
 Aufgabenblätter befinden sich im Repository
