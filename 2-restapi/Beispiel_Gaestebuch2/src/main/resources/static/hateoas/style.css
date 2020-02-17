@@ -1,0 +1,41 @@
+/*
+ * Copyright © 2020 Dennis Schulmeister-Zimolong
+ *
+ * E-Mail: dhbw@windows3.de
+ * Webseite: https://www.wpvs.de/
+ *
+ * Dieser Quellcode ist lizenziert unter einer
+ * Creative Commons Namensnennung 4.0 International Lizenz.
+ */
+
+body {
+    font-family: sans-serif;
+    font-size: 10pt;
+
+    background-color: #101010;
+    color: #68bd76;
+    text-shadow: 1px 1px 2px rgba(255,255,255, 0.4);
+}
+
+hr {
+    color: #68bd76;
+    margin: 2em 0 2em 0;
+}
+
+/*
+ * Simpler CRT-Effekt, übernommen aus folgender Anleitung:
+ * http://aleclownes.com/2017/02/01/crt-display.html
+ */
+body::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.20) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.007), rgba(0, 0, 255, 0.01));
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}

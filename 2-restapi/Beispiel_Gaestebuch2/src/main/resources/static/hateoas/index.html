@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>REST-Gästebuch</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script src="rest-client.js"></script>
+        <link rel="stylesheet" href="style.css" />
+
+        <script>
+            const API_URL = "http://localhost:9090/api";
+
+            window.addEventListener("load", async () => {
+                let body = document.querySelector("body");
+
+                // Schritt 1: Aufruf der Root-URL des Webservices                
+                let rootClient = new RestClient(API_URL);
+                let response = await rootClient.get();
+
+                body.innerHTML += "<h1>Startadresse des Webservices</h1>";
+                body.innerHTML += `<h2>GET ${rootClient.url}</h2>`;
+                body.innerHTML += `<pre>${ JSON.stringify(response.data, null, 4) }</pre>`;
+                body.innerHTML += "<hr/>";
+
+                // Schritt 2: Dem Link `guestbookEntries` folgen                
+                let collectionClient = rootClient.follow("guestbookEntries");
+                response = await collectionClient.get();
+
+                body.innerHTML += "<h1>Relation guestbookEntries</h1>";
+                body.innerHTML += `<h2>GET ${collectionClient.url}</h2>`;
+                body.innerHTML += `<pre>${ JSON.stringify(response.data, null, 4) }</pre>`;
+                body.innerHTML += "<hr/>";
+
+                // Schritt 3: Den ersten Treffer abrufen
+                let firstResult = response.data._embedded.guestbookEntries[0] || {};
+                let resultClient = collectionClient.follow(firstResult, "self");
+                response = await resultClient.get();
+
+                body.innerHTML += "<h1>Relation self des ersten Treffers</h1>";
+                body.innerHTML += `<h2>GET ${resultClient.url}</h2>`;
+                body.innerHTML += `<pre>${ JSON.stringify(response.data, null, 4) }</pre>`;
+            });
+        </script>
+    </head>
+    <body>
+        <!-- Hier wird das Ergebnis angezeigt -->
+    </body>
+</html>
