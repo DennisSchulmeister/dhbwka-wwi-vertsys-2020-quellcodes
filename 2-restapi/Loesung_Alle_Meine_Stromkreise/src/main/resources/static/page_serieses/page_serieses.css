@@ -1,0 +1,66 @@
+/* 
+ * Copyright © 2020 Dennis Schulmeister-Zimolong
+ * 
+ * E-Mail: dhbw@windows3.de
+ * Webseite: https://www.wpvs.de/
+ * 
+ * Dieser Quellcode ist lizenziert unter einer
+ * Creative Commons Namensnennung 4.0 International Lizenz.
+ */
+
+/**
+ ** SEITE: SERIE AUSWÄHLEN
+ **/
+.list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.list > * {
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 100%;
+}
+
+.list img {
+    border: 1px solid grey;
+
+    width: 100%;
+    height: 15em;
+    object-fit: cover;
+    object-position: top;
+}
+
+@media (min-width: 40.0rem) {
+    /* Larger than mobile screen */
+    .list > * {
+        width: 50%;
+    }
+
+    .list img {
+        height: 17em;
+    }
+}
+
+@media (min-width: 80.0rem) {
+    /* Larger than tablet screen */
+    .list > * {
+        width: 33%;
+    }
+
+    .list img {
+        height: 20em;
+    }
+}
+
+@media (min-width: 120.0rem) {
+    /* Larger than desktop screen */
+    .list > * {
+        width: 33%;
+    }
+
+    .list img {
+        height: 25em;
+    }
+}

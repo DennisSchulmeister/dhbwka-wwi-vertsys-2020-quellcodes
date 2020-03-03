@@ -1,0 +1,22 @@
+<main>
+    <div id="header">
+        <h1>
+            <a href="#/">
+                <img src="television-151745.svg" alt="Home">
+            </a>
+            $STREAMING_SERVICE_NAME$
+        </h1>
+    </div>
+    <div id="content">
+        <h3>Serien</h3>
+        <div class="list"></div>
+    </div>
+</main>
+
+<!-- https://pixabay.com/illustrations/bokeh-silver-grey-overlay-2152298/ -->
+<template id="template-item">
+    <a class="item" href="/#$STREAMING_SERVICE_ID$/$SERIES_ID$">
+        <img src="bokeh-2152298_1280.jpg" alt="" data-series-id="$SERIES_ID$">
+        <h4>$NAME$</h4>
+    </a>
+</template>

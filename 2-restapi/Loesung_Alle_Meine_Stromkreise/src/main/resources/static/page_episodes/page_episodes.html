@@ -1,0 +1,61 @@
+<main>
+    <div id="header">
+        <h1>
+            <a href="#$STREAMING_SERVICE_ID$">
+                <img src="television-151745.svg" alt="Home">
+            </a>
+            $SERIES_NAME$
+        </h1>
+    </div>
+    <div id="content">
+        <div id="info">
+            <!-- Details zur Serie -->
+            <img src="bokeh-2152298_1280.jpg" alt="" class="series-poster">
+            <p>
+                $SERIES_DESCRIPTION$
+            </p>
+            <table class="small">
+                <tr>
+                    <td>
+                        <b>Land:</b>
+                    </td>
+                    <td>
+                        $SERIES_COUNTRY$
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Staffeln:</b>
+                    </td>
+                    <td>
+                        $SERIES_MAX_SEASONS$ ($SERIES_YEAR_FROM$ - $SERIES_YEAR_TO$)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Status:</b>
+                    </td>
+                    <td>
+                        $SERIES_STATUS$
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="episodes">
+            <!-- Episodenliste -->
+            <select id="select-season"></select>
+            <div class="list"></div>
+        </div>
+    </div>
+</main>
+
+<template id="template-season-option">
+    <option value="$SEASON_NUMBER$">Staffel $SEASON_NUMBER$</option>
+</template>
+
+<template id="template-episode">
+    <div class="episode hidden" data-season="$EPISODE_SEASON$" data-number="$EPISODE_NUMBER$">
+        <img src="bokeh-2152298_1280.jpg" alt="" class="episode-poster">
+        <h4><span class="episode-number">$EPISODE_NUMBER$.</span> $EPISODE_NAME$</h4>
+    </div>
+</template>
