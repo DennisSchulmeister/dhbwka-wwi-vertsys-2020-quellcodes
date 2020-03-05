@@ -1,0 +1,16 @@
+
+# Docker File basierend auf dem Beispiel: https://nodejs.org/de/docs/guides/nodejs-docker-webapp/
+
+FROM node:10
+
+WORKDIR /usr/src/app
+
+COPY ./meinprojekt/package*.json ./
+RUN pwd
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8089
+CMD [ "node", "meinprojekt/server.js" ]

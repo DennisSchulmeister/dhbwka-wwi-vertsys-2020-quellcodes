@@ -1,0 +1,13 @@
+{
+  "name": "meinprojekt",
+  "version": "1.0.0",
+  "description": "REST Anwendeung mit ExpressJS",
+  "author": "martin.kutscher@exxeta.com",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "4.16.1"
+  }
+}

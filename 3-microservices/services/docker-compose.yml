@@ -1,0 +1,59 @@
+version: '3.3'
+networks:
+  esnet:
+services:
+  meinprojekt:
+    image: meinprojekt:latest
+    networks:
+      - esnet
+    ports: 
+      - "49160:8089"
+  mqtt:
+    image: eclipse-mosquitto:latest
+    networks:
+      - esnet
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mqtt/config:/mosquitto/config
+      - ./mqtt/data:/mosquitto/data
+      - ./mqtt/log:/mosquitto/log
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.0.1
+    networks:
+      - esnet
+    ports: 
+      - "5601:5601"
+    depends_on:
+      - "elasticsearch"
+    environment:
+      SERVER_NAME: kibana01
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+  elasticsearch:
+      image: docker.elastic.co/elasticsearch/elasticsearch:7.0.0
+      tty : true
+      environment:
+        - discovery.type=single-node
+        - http.cors.enabled=true
+        - http.cors.allow-credentials=true
+        - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
+        - http.cors.allow-origin=/https?:\/\/localhost(:[0-9]+)?/
+        - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      ulimits:
+        memlock:
+          soft: -1
+          hard: -1
+      ports:
+        - 9200:9200
+        - 9300:9300
+      networks:
+        - esnet
+      healthcheck:
+        test: curl -s https://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+        interval: 30s
+        timeout: 10s
+        retries: 5
+      volumes:
+        - ./Elasticsearch/data:/usr/share/elasticsearch/data 
