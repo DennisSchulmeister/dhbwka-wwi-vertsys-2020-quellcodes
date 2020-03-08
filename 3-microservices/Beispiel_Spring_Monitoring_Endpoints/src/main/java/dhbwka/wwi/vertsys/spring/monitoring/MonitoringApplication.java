@@ -18,7 +18,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Hauptklasse der Anwendung. Diese Anwendung besitzt keinen weiteren Quellcode.
  * Sie zeigt lediglich, wie in der pom.xml eine Abhängigkeit eingetragen werden
  * kann, um ein ausführliches App-Monitoring zu ermöglichen.
- * 
+ *
  * Zum Testen der Services kann folgende URL verwendet werden:
  * http://localhost:8080/explorer/index.html#uri=/actuator
  */
@@ -26,16 +26,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MonitoringApplication {
 
     private static Logger logger = LoggerFactory.getLogger(MonitoringApplication.class);
-    
+
     public static void main(String[] args) {
         SpringApplication.run(MonitoringApplication.class, args);
-        
+
         logger.info("");
         logger.info("");
         logger.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         logger.info(">>> Monitoring-Serivces verfügbar unter http://localhost:8080/actuator          <<<");
         logger.info(">>> Test im Browser mit http://localhost:8080/explorer/index.html#uri=/actuator <<<");
         logger.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        logger.info("");
+        logger.info("");
     }
 
 }
