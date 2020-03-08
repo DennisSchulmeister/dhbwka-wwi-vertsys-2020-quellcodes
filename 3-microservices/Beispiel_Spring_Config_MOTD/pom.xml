@@ -10,21 +10,21 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     
-    <groupId>dhbwka.wwi.vertsys.spring.admin</groupId>
-    <artifactId>client2</artifactId>
+    <groupId>dhbwka.wwi.vertsys.spring.config</groupId>
+    <artifactId>motd</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Beispiel: Spring Boot Admin (Client 2)</name>
-    <description>Spring Boot Admin: Client 2</description>
+    <name>Beispiel: Spring Config (MOTD-Service)</name>
+    <description>Spring Config Server: MOTD-Service</description>
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-boot-admin.version>2.2.1</spring-boot-admin.version>
+        <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
     </properties>
 
     <dependencies>
-        <!-- ========================================================== -->
-        <!-- Standard-Dependencies für eine Webanwendung mit Springboot -->
-        <!-- ========================================================== -->
+        <!-- ========================================================= -->
+        <!-- Standard-Abhänigkeiten für Webanwenudngen mit Spring Boot -->
+        <!-- ========================================================= -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -42,21 +42,26 @@
             </exclusions>
         </dependency>
         
-        <!-- ============================================================== -->
-        <!-- !!! Diese App vom zentralen Admin-Server überwachen lassen !!! -->
-        <!-- ============================================================== -->
         <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        
+        <!-- ================================ -->
+        <!-- !! Spring Cloud Config Client !! -->
+        <!-- ================================ -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-dependencies</artifactId>
-                <version>${spring-boot-admin.version}</version>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

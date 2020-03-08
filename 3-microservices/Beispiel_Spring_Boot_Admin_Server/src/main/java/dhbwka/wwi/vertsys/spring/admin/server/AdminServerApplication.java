@@ -25,12 +25,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @EnableAdminServer
-public class ServerApplication {
+public class AdminServerApplication {
 
-    private static Logger logger = LoggerFactory.getLogger(ServerApplication.class);
+    private static Logger logger = LoggerFactory.getLogger(AdminServerApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(ServerApplication.class, args);
+        SpringApplication.run(AdminServerApplication.class, args);
 
         logger.info("");
         logger.info("");
