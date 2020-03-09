@@ -1,0 +1,41 @@
+#
+# Allgemeine Grundkonfiguration des Gateway-Servers
+# Vgl. https://www.devglan.com/spring-cloud/spring-cloud-gateway-example
+#
+spring.application.name: aufgabe-naas-gateway
+server.port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+  instance:
+    preferIpAddress: true
+
+hystrix.command.fallbackcmd.execution.isolation.thread.timeoutInMilliseconds: 2000
+management.endpoints.web.exposure.include: hystrix.stream
+
+#
+# Konfiguration der URL-Weiterleitungen
+# Vgl. https://spring.io/projects/spring-cloud-gateway#learn
+#
+# Jede Regel besitzt eine ID, die sie kennzeichnet und im Feld `uri` eine
+# Zieladresse, an welche die Anfrage weitergeleitet wird. lb://xxx bedeutet
+# dabei, dass der Service im Nameserver nachgeschlagen wird. Mit `predicates`
+# können weitere Einschränkungen der gematchten HTTP-Anfragen vorgenommen
+# werden. Mit `filters` hingegen können die weitergeleiteten HTTP-Anfragen
+# umfangreich bearbeitet werden.
+#
+
+#spring.cloud.gateway.routes:
+#    - id: backend1_hi
+#      uri: lb://beispiel-apigate-backend1
+#      predicates:
+#      - Path=/api/hi/**
+#      filters:
+#      - RewritePath=/api/hi/, /hi/
+#      - name: Hystrix
+#        args:
+#            name: hystrix
+#            fallbackUri: forward:/fallback/backend1/hi
