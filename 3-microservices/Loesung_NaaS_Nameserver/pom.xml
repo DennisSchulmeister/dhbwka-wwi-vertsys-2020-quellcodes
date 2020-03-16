@@ -14,7 +14,7 @@
     <artifactId>nameserver</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Lösung: Notebook as a Service (Nameserver)</name>
-    <description>Lösung: Notebook as a Service (Nameserver=)</description>
+    <description>Lösung: Notebook as a Service (Nameserver)</description>
 
     <properties>
         <java.version>1.8</java.version>
