@@ -23,7 +23,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
  * Klasse mit den üblichen Methoden zum Lesen, Schreiben und Löschen von
  * Einträgen.
  */
-@RepositoryRestResource(collectionResourceRel = "lendingRequests", path = "lendingRequests")
+@RepositoryRestResource(collectionResourceRel = "lending_requests", path = "lending_requests")
 public interface LendingRequestRepository extends PagingAndSortingRepository<LendingRequest, Long> {
 
     List<LendingRequest> findByDeviceId(long deviceId);
@@ -31,7 +31,7 @@ public interface LendingRequestRepository extends PagingAndSortingRepository<Len
     List<LendingRequest> findByDeviceIdAndStatus(long deviceId, LendingStatus status);
 
     List<LendingRequest> findByStatus(LendingStatus status);
-
+    
     @Query("SELECT count(lr) FROM LendingRequest lr "
             + "WHERE lr.deviceId = :deviceId AND "
             + " lr.status = dhbwka.wwi.vertsys.loesung.naas.lending_backend.entity.LendingStatus.LENDED AND ("

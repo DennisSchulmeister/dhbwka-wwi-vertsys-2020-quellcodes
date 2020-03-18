@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--
+Copyright © 2020 Dennis Schulmeister-Zimolong
+
+E-Mail: dhbw@windows3.de
+Webseite: https://www.wpvs.de/
+
+Dieser Quellcode ist lizenziert unter einer
+Creative Commons Namensnennung 4.0 International Lizenz.
+-->
+<html lang="de">
+    <head>
+        <title>Notebook as a Service</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- https://pixabay.com/vectors/computer-electronics-flat-laptop-1299659/ -->
+        <link rel="shortcut icon" href="favicon.svg">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+        <!-- Eigene Skripte und Stylesheets -->
+        <link rel="stylesheet" href="style.css">
+        <script src="app.js" type="module"></script>
+    </head>
+    <body>
+        <!-- Kopfbereich mit Banner -->
+        <header>
+            <div class="jumbotron">
+                <h1 class="display-4">Notebook as a Service</h1>
+                <p class="lead">Der einfache und unkomplizierte Hardwareverleih in der Firma</p>
+            </div>
+        </header>
+
+        <!-- Hauptbereich -->
+        <main>
+            <div id="main-carousel" class="carousel slide">
+                <!-- Slide-Inhalt -->
+                <div class="carousel-inner">
+                    <!-- Seite 1: Zeitraum und Gerätetyp auswählen -->
+                    <div id="page-search" class="carousel-item active">
+                        <h2 class="text-primary text-center mb-4">Zeitraum und Gerätetyp auswählen</h2>
+
+                        <div class="d-md-flex justify-content-center">
+                            <form>
+                                <div class="form-group form-row">
+                                    <div class="col">
+                                        <label for="form-search-startdate">Ausleihdatum</label>
+                                        <input type="date" class="form-control" name="startdate" id="form-search-startdate">
+                                    </div>
+                                    <div class="col">
+                                        <label for="form-search-starttime">Uhrzeit</label>
+                                        <input type="time" class="form-control" name="starttime" id="form-search-starttime">
+                                    </div>
+                                </div>
+
+                                <div class="form-group form-row">
+                                    <div class="col">
+                                        <label for="form-search-enddate">Rückgabedatum</label>
+                                        <input type="date" class="form-control" name="enddate" id="form-search-enddate">
+                                    </div>
+                                    <div class="col">
+                                        <label for="form-search-endtime">Uhrzeit</label>
+                                        <input type="time" class="form-control" name="endtime" id="form-search-endtime">
+                                    </div>
+                                </div>
+
+                                <div id="form-search-device-classes" class="form-group">
+                                    <!-- Dynamisch erzeugtes HTML -->
+                                    <!--
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="device-class" id="form-search-device-class-1" value="1" checked>
+                                        <label class="form-check-label" for="form-search-device-class-1">Laptops</label>
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="device-class" id="form-search-device-class-2" value="2">
+                                        <label class="form-check-label" for="form-search-device-class-2">Smartphones</label>
+                                    </div>
+                                    -->
+                                </div>
+
+                                <button type="submit" class="btn btn-primary mb-4">Verfügbare Geräte suchen</button>
+
+                                <div id="form-search-alerts">
+                                    <!-- Dynamisch erzeugtes HTML -->
+                                    <!--
+                                    <div class="alert alert-danger" role="alert">
+                                        Fehlermeldung
+                                    </div>
+                                    -->
+                                </div>
+                            </form>  
+                        </div>
+                    </div>
+
+                    <!-- Seite 2: Gerät auswählen -->
+                    <div id="page-device" class="carousel-item">
+                        <h2 class="text-primary text-center mb-2">Gerät aussuchen</h2>
+
+
+                        <div id="device-cards" class="d-md-flex justify-content-center align-items-stretch flex-wrap">
+                            <!-- Dynamisch erzeugtes HTML -->
+                            <!--
+                            <div class="card m-2">
+                                < -- https://pixabay.com/vectors/laptop-computer-portable-pc-2298286/ -- >
+                                <img src="placeholder.svg" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Lenovo Thinkpad E580</h5>                                    
+                                    <button type="button" class="btn btn-success">Ausleihen</button>
+                                </div>
+                            </div>
+
+                            <div class="card m-2">
+                                < -- https://pixabay.com/vectors/laptop-computer-portable-pc-2298286/ -- >
+                                <img src="placeholder.svg" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title">Lenovo Thinkpad E580</h5>                                    
+                                    <button type="button" class="btn btn-danger" disabled>Nicht verfügbar</button>
+                                </div>
+                            </div>
+                            -->
+                        </div>
+                    </div>
+
+                    <!-- Seite 3: Ausgewähltes Gerät ausleihen -->
+                    <div id="page-lend" class="carousel-item">
+                        <h2 class="text-primary text-center mb-4">Ausgewähltes Gerät ausleihen</h2>
+
+                        <div class="d-md-flex justify-content-center">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img src="placeholder.svg" id="lend-image" class="d-block w-100">
+                                    </div>
+                                    <div class="col-md">
+                                        <form>
+                                            <div class="form-group">
+                                                <label for="form-lend-device">Ausgewähltes Gerät</label>
+                                                <input type="text" class="form-control" name="device" id="form-lend-device" readonly>
+                                            </div>
+
+                                            <div class="form-group form-row">
+                                                <div class="col">
+                                                    <label for="form-lend-startdate">Ausleihdatum</label>
+                                                    <input type="date" class="form-control" name="startdate" id="form-lend-startdate" readonly>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="form-lend-starttime">Uhrzeit</label>
+                                                    <input type="time" class="form-control" name="starttime" id="form-lend-starttime" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group form-row">
+                                                <div class="col">
+                                                    <label for="form-lend-enddate">Rückgabedatum</label>
+                                                    <input type="date" class="form-control" name="enddate" id="form-lend-enddate" readonly>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="form-lend-endtime">Uhrzeit</label>
+                                                    <input type="time" class="form-control" name="endtime" id="form-lend-endtime" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="form-lend-contact">Kontaktdaten</label>
+                                                <input type="text" class="form-control" name="contact" id="form-lend-contact">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="form-lend-location">Bereitstellungsort</label>
+                                                <input type="text" class="form-control" name="location" id="form-lend-location">
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary mb-4">Jetzt ausleihen</button>
+
+                                            <div id="form-lend-alerts">
+                                                <!-- Dynamisch erzeugtes HTML -->
+                                                <!--
+                                                <div class="alert alert-danger" role="alert">
+                                                    Fehlermeldung
+                                                </div>
+                                                -->
+                                            </div>
+                                        </form>      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seite 4: Bestätigung -->
+                    <div id="page-finish" class="carousel-item">
+                        <h2 class="text-success text-center mb-4">Vielen Dank!</h2>
+                        <p class="text-center">
+                            Das gewünschte Gerät wird demnächst zur Verfügung gestellt.
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+            
+                            <!-- Indikator-Buttons -->
+                <ol id="main-carousel-indicators" class="carousel-indicators d-flex">
+                    <!-- Dynamisch erzeugtes HTML -->
+                    <!--
+                    <li data-target="#main-carousel" data-slide-to="0" class="active"></li>
+                    -->
+                </ol> 
+        </main>
+    </body>
+</html>

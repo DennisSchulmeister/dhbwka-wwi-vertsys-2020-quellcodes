@@ -60,3 +60,21 @@ spring.cloud.gateway.routes:
         args:
             name: hystrix
             fallbackUri: forward:/fallback/backend2/greetRandom
+
+ # Beispielhafte CORS-Konfiguration, um den Browsern den Aufruf des API-Gateways
+ # zu erlauben, wenn die HTML-Seite von localhost:8079 geladen wurde.
+ # Vgl. https://javarubberduck.com/java/cors-gateway/
+spring.cloud.gateway.globalcors:
+    corsConfigurations:
+        '[/**]':
+            allowedOrigins: "http://localhost:8079"
+            allowedMethods:
+                - GET
+                - PUT
+                - POST
+                - PATCH
+                - DELETE
+                - OPTIONS
+                - HEAD
+
+    addToSimpleUrlHandlerMapping: true

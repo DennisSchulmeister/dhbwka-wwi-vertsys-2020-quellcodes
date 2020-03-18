@@ -42,10 +42,10 @@ public class LendingRequest implements Serializable {
     private String manufacturer = "";
     private String model = "";
     
-    @NotNull(message = "Die Startzeit darf nicht leer sein.")
+    @NotNull(message = "Die Ausleihdatum darf nicht leer sein.")
     private LocalDateTime startTime = LocalDateTime.now();
     
-    @NotNull(message = "Die Endzeit darf nicht leer sein.")
+    @NotNull(message = "Die Rückgabedatum darf nicht leer sein.")
     private LocalDateTime endTime = LocalDateTime.now();
     
     private LendingStatus status;

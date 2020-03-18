@@ -82,6 +82,10 @@ public class LendingService {
         if (!checkDeviceIsAvailable(request.getDeviceId(), request.getStartTime(), request.getEndTime())) {
             throw new LendingException("Das Gerät ist im gewünschten Zeitraum nicht verfügbar.");
         }
+        
+        if (request.getStartTime().isAfter(request.getEndTime())) {
+            throw new LendingException("Das Rückgabedatum darf nicht vor dem Ausleihdatum liegen.");
+        }
     }
 
     /**

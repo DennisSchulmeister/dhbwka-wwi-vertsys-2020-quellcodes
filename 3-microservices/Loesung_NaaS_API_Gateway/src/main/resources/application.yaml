@@ -49,7 +49,7 @@ spring.cloud.gateway.routes:
       - Path=/api/catalog/**
       filters:
       - RewritePath=/api/catalog/, /
-
+      
     # Backend: Ausleihe
     - id: lending_backend
       uri: lb://AUFGABE-NAAS-LENDING
@@ -57,3 +57,20 @@ spring.cloud.gateway.routes:
       - Path=/api/lending/**
       filters:
       - RewritePath=/api/lending/, /
+      
+ # CORS-Konfiguration, um den Browsern den Aufruf des API-Gateways zu erlauben,
+ # wenn die HTML-Seite von localhost:8079 geladen wurde.
+ # Vgl. https://javarubberduck.com/java/cors-gateway/
+spring.cloud.gateway.globalcors:
+    corsConfigurations:
+        '[/**]':
+            allowedOrigins: "http://localhost:8079"
+            allowedMethods:
+                - GET
+                - PUT
+                - POST
+                - PATCH
+                - DELETE
+                - OPTIONS
+                - HEAD
+    addToSimpleUrlHandlerMapping: true
