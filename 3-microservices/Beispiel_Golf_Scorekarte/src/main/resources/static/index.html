@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--
+Copyright © 2020 Dennis Schulmeister-Zimolong
+
+E-Mail: dhbw@windows3.de
+Webseite: https://www.wpvs.de/
+
+Dieser Quellcode ist lizenziert unter einer
+Creative Commons Namensnennung 4.0 International Lizenz.
+-->
+<html>
+    <head>
+        <title>Golf-Scorekarte</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+        <!-- Favicon/Logo: https://pixabay.com/de/vectors/tier-anthropomorphe-1299106/ -->
+        <link rel="shortcut icon" href="logo.png">
+
+        <!-- Eigene Stylesheets und Javascript-Dateien -->
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <!-- Kopfbereich -->
+        <div class="jumbotron d-md-flex align-items-center">
+            <img src="logo.svg" class="logo"/>
+            <h1 class="display-4">
+                Golfcard
+                <span class="d-none d-md-inline">
+                    – Bei jeder Runde mit dabei
+                </span>
+            </h1>
+        </div>
+
+        <!-- Übersichtsseite -->
+        <div id="page-overview" class="page hidden">
+            <div class="actions mb-3">
+                <button class="btn btn-primary new-scorecard">Neues Spiel starten</button>
+            </div>
+            <div class="scorecards d-flex align-items-stretch flex-wrap align-content-start">
+                <!-- Dynamisch erzeugtes HTML -->
+                <!--
+                <div class="card" data-scorecard="1" data-golf-course="Golfclub Rheinstetten" data-game-date-time="15. Februar 2020, 12:00 ">
+                    < !-- https://pixabay.com/de/photos/kugel-fairway-golf-golfball-gras-1850984/ -- >
+                    <img src="cardheader.jpg" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Golfclub Rheinstetten</h5>
+                        <p class="card-text">
+                            19.02.2020 15:00, 9 Loch
+                        </p>
+
+                        <div class="numbers d-flex justify-content-between align-items-stretch flex-wrap align-content-start">
+                            <div class="big-number flex-grow-1 mb-4">
+                                <div class="bn-value">
+                                    28
+                                </div>
+                                <div class="bn-label">
+                                    Schläge
+                                </div>
+                            </div>
+                            
+                            <div class="big-number flex-grow-1 mb-4">
+                                <div class="bn-value">
+                                    2
+                                </div>
+                                <div class="bn-label">
+                                    Strafschläge
+                                </div>
+                            </div>
+                            
+                            <div class="big-number flex-grow-1 mb-4">
+                                <div class="bn-value">
+                                    30
+                                </div>
+                                <div class="bn-label">
+                                    Gesamt
+                                </div>
+                            </div>
+                            
+                            <div class="big-number flex-grow-1 mb-4">
+                                <div class="bn-value">
+                                    23
+                                </div>
+                                <div class="bn-label">
+                                    Stabelford
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#" class="card-link details">Details</a>
+                        <a href="#" class="card-link delete">Löschen</a>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div>
+
+        <!-- Details zur Scorekarte -->
+        <div id="page-scorecard" class="page hidden">
+            <div class="actions mb-3">
+                <button class="btn btn-warning back">Zurück zur Übersicht</button>
+            </div>
+            <div class="content d-flex d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="scorecard-form" class="mb-4" data-scorecard="">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="course" placeholder="Name des Golfplatzes" readonly>
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="date" class="form-control" name="date" readonly>
+                                </div>
+                                <div class="col">
+                                    <input type="time" class="form-control" name="time" readonly>
+                                </div>
+                            </div>
+                        </form>
+
+                        <table class="table mb-4 holes">
+                            <thead>
+                                <tr>
+                                    <th>Loch</th>
+                                    <th>Par</th>
+                                    <th>Schläge</th>
+                                    <th>Strafschläge</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <!-- Dynamisch erzeugtes HTML -->
+                            <!--
+                            <tr data-hole="4711" data-number="1" data-status="saved">
+                                <td>
+                                    <a href="#">1</a>
+                                </td>
+                                <td>3</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>
+                                    <button type="button" class="close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr data-hole="4712" data-number="1" data-status="saved">
+                                <td>
+                                    <a href="#">2</a>
+                                </td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>1</td>
+                                <td>
+                                    <button type="button" class="close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr data-hole="0" data-status="new">
+                                <form>
+                                    <td>
+                                        <input type="number" name="number">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="par">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="strokes">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="penalty">
+                                    </td>
+                                    <td>
+                                        <button type="button" class="close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </td>
+                                </form>
+                            </tr>
+                            -->
+                        </table>
+
+                        <a href="#" class="card-link first">Weiter zum ersten Loch</a>
+                        <a href="#" class="card-link next">Weiter zum nächsten Loch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popup für Sicherheitsabfragen -->
+        <div id="popup-to-confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="popup-to-confirm-title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="popup-to-confirm-title">Titel des Popups</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Textinhalt des Popups
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tue nix</button>
+                        <button type="button" class="btn btn-primary">Tue was</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
