@@ -9,22 +9,19 @@
  */
 package dhbwka.wwi.vertsys.spring.feign.restserver;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Einfache Datentransferklasse für eine Statusmeldung, wie sie der Webservice
  * nach dem Hinzufügen eines Eintrags zurückgibt.
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class MessageDTO {
     
     private String text;
-    
-    public MessageDTO() {
-    }
-    
-    public MessageDTO(String text) {
-        this.text = text;
-    }
-    
+
 }

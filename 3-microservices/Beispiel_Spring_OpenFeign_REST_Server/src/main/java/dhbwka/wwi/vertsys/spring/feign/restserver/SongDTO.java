@@ -9,24 +9,20 @@
  */
 package dhbwka.wwi.vertsys.spring.feign.restserver;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Einfaches Datentransferobjekt für einen Song. Der Beispiel-Webservice
  * liefert als Antwort einfach eine Liste mit Objekten dieses Typs.
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class SongDTO {
     
     private String artist;
     private String title;
-    
-    public SongDTO() {
-    }
-    
-    public SongDTO(String artist, String title) {
-        this.artist = artist;
-        this.title = title;
-    }
-    
+        
 }
