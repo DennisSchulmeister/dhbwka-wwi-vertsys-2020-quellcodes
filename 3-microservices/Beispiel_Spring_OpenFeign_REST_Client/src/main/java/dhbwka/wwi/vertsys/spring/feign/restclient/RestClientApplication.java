@@ -68,8 +68,8 @@ public class RestClientApplication implements CommandLineRunner {
         logger.info(">>> Schicke einen neuen Song an den Server.");
 
         Song newSong = new Song();
-        newSong.setArtist("Joe Zavinul");
-        newSong.setTitle("Mercy, Mercy!");
+        newSong.setArtist("Joe Zawinul");
+        newSong.setTitle("Mercy, Mercy, Mercy!");
 
         Message message = this.webservice.addSong(newSong);
 
