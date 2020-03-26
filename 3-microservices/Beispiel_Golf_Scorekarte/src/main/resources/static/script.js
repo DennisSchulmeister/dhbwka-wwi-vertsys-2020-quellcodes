@@ -156,7 +156,7 @@ async function showOverviewPage() {
                             ---
                         </div>
                         <div class="bn-label">
-                            Stabelford
+                            Stableford
                         </div>
                     </div>
                 </div>
