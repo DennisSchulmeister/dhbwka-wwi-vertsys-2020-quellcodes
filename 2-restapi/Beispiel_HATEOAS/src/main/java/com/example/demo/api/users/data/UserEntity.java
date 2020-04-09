@@ -14,9 +14,18 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Modelliert eine Datenbankzeile fuer einen Benutzereintrag. Die Lombok-Annotationen halten den Code kurz.
  * 
-*/
+ * Copyright © 2020 Martin Kutscher
+ * 
+ * E-Mail: martin.kutscher@exxeta.com
+ * 
+ * Dieser Quellcode ist lizenziert unter einer Creative Commons Namensnennung
+ * 4.0 International Lizenz.
+ * 
+ * Modelliert eine Datenbankzeile fuer einen Benutzereintrag. Die
+ * Lombok-Annotationen halten den Code kurz.
+ * 
+ */
 @Data
 @Builder
 @AllArgsConstructor

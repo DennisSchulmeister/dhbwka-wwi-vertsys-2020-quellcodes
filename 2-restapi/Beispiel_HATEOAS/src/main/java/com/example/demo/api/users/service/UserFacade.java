@@ -8,9 +8,18 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 
 /**
- * Kapselt die Datentransformation der Benutzer und bietet auch Raum für notwendige Business Logik, wie z.B. Autorisierungspruefungen.
  * 
-*/
+ * Copyright © 2020 Martin Kutscher
+ * 
+ * E-Mail: martin.kutscher@exxeta.com
+ * 
+ * Dieser Quellcode ist lizenziert unter einer Creative Commons Namensnennung
+ * 4.0 International Lizenz.
+ * 
+ * Kapselt die Datentransformation der Benutzer und bietet auch Raum für
+ * notwendige Business Logik, wie z.B. Autorisierungspruefungen.
+ * 
+ */
 @Service
 public class UserFacade {
 

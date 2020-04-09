@@ -1,4 +1,12 @@
 
+ -- Copyright © 2020 Martin Kutscher
+
+ -- E-Mail: martin.kutscher@exxeta.com
+ 
+ -- Dieser Quellcode ist lizenziert unter einer
+ -- Creative Commons Namensnennung 4.0 International Lizenz.
+
+ 
 -- User speichern
 CREATE TABLE "demo_user" (
     id INT PRIMARY KEY,

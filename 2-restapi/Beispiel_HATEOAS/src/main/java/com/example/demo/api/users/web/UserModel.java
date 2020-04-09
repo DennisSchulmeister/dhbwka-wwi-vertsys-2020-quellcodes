@@ -16,9 +16,17 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
+ * 
+ * Copyright © 2020 Martin Kutscher
+ * 
+ * E-Mail: martin.kutscher@exxeta.com
+ * 
+ * Dieser Quellcode ist lizenziert unter einer Creative Commons Namensnennung
+ * 4.0 International Lizenz.
+ * 
  * Data Transfer Object fuer Benutzer, welches die HAL-Relationen definiert.
  * 
-*/
+ */
 @Data
 @Builder
 @NoArgsConstructor
@@ -27,11 +35,10 @@ import lombok.NoArgsConstructor;
 @JsonRootName(value = "user")
 @Relation(collectionRelation = "users")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UserModel extends RepresentationModel<UserModel> 
-{
+public class UserModel extends RepresentationModel<UserModel> {
     private Long id;
     private String firstName;
     private String lastName;
-     
+
     private List<GroupModel> groups;
 }

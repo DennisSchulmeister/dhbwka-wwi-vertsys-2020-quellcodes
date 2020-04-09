@@ -13,6 +13,14 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.MediaTypes;
 
 /**
+ * 
+ * Copyright © 2020 Martin Kutscher
+ * 
+ * E-Mail: martin.kutscher@exxeta.com
+ * 
+ * Dieser Quellcode ist lizenziert unter einer
+ * Creative Commons Namensnennung 4.0 International Lizenz.
+ * 
  * Test mit dem HATEOAS-CLient Traverson, der das Spring-Resttemplate kapselt.
  * Die Navigation erfolgt über die Relationen und auch ueber Ausdruecke im JSPN Path format.
  * In diesem Test wird zunaechst dem Link zu Benutzern gefolgt und dann die 1. Gruppe des 1. Benutzers abgefragt 

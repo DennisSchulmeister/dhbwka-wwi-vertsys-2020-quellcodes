@@ -12,9 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * 
+ * Copyright © 2020 Martin Kutscher
+ * 
+ * E-Mail: martin.kutscher@exxeta.com
+ * 
+ * Dieser Quellcode ist lizenziert unter einer Creative Commons Namensnennung
+ * 4.0 International Lizenz.
+ * 
  * Ermöglicht Lesen einer Gruppe über die Id oder alle vorhandenen Gruppen.
  * 
-*/
+ */
 @RestController
 @RequestMapping("/api/groups")
 public class GroupController {

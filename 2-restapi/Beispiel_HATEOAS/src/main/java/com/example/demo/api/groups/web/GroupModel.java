@@ -15,11 +15,18 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-
 /**
+ * 
+ * Copyright © 2020 Martin Kutscher
+ * 
+ * E-Mail: martin.kutscher@exxeta.com
+ * 
+ * Dieser Quellcode ist lizenziert unter einer Creative Commons Namensnennung
+ * 4.0 International Lizenz.
+ * 
  * Data Transfer Object fuer Gruppen, welches die HAL-Relationen definiert.
  * 
-*/
+ */
 @Data
 @Builder
 @NoArgsConstructor
@@ -28,11 +35,11 @@ import lombok.NoArgsConstructor;
 @JsonRootName(value = "group")
 @Relation(collectionRelation = "groups")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class GroupModel extends RepresentationModel<GroupModel>{
+public class GroupModel extends RepresentationModel<GroupModel> {
 
         private Long id;
         private String groupName;
         private String description;
         private List<UserModel> users;
-    
+
 }

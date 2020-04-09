@@ -19,16 +19,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Modelliert eine Datenbankzeile fuer einen Grupppeneintrag. Die Lombok-Annotationen halten den Code kurz.
  * 
-*/
+ * Copyright © 2020 Martin Kutscher
+ * 
+ * E-Mail: martin.kutscher@exxeta.com
+ * 
+ * Dieser Quellcode ist lizenziert unter einer Creative Commons Namensnennung
+ * 4.0 International Lizenz.
+ * 
+ * Modelliert eine Datenbankzeile fuer einen Grupppeneintrag. Die
+ * Lombok-Annotationen halten den Code kurz.
+ * 
+ */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="demo_group")
-public class GroupEntity implements Serializable{
+@Table(name = "demo_group")
+public class GroupEntity implements Serializable {
 
     private static final long serialVersionUID = 3628088657445508772L;
 
@@ -38,8 +47,8 @@ public class GroupEntity implements Serializable{
 
     private String groupName;
     private String description;
-     
-    @ManyToMany(mappedBy = "groups",fetch = FetchType.EAGER)
+
+    @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
     private List<UserEntity> users;
 
 }

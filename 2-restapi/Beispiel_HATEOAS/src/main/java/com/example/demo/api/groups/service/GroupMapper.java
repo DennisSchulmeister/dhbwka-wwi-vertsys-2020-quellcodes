@@ -14,11 +14,22 @@ import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSuppor
 import org.springframework.stereotype.Service;
 
 /**
- * Transformiert einen (toModel) oder mehrere Gruppen-Datenbankeinträge (toCollectionModel) ins Austauschformat (Model, das Data Transfer Object).
- * Hier werden auch die HAL-Verknuepfungen (Relations mit Links) gesetzt.
- * Beachte: statischer Import: import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*; liefert die wichtigen Methoden.
  * 
-*/
+ * Copyright © 2020 Martin Kutscher
+ * 
+ * E-Mail: martin.kutscher@exxeta.com
+ * 
+ * Dieser Quellcode ist lizenziert unter einer Creative Commons Namensnennung
+ * 4.0 International Lizenz.
+ * 
+ * Transformiert einen (toModel) oder mehrere Gruppen-Datenbankeinträge
+ * (toCollectionModel) ins Austauschformat (Model, das Data Transfer Object).
+ * Hier werden auch die HAL-Verknuepfungen (Relations mit Links) gesetzt.
+ * Beachte: statischer Import: import static
+ * org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*; liefert die
+ * wichtigen Methoden.
+ * 
+ */
 @Service
 public class GroupMapper extends RepresentationModelAssemblerSupport<GroupEntity, GroupModel> {
 
