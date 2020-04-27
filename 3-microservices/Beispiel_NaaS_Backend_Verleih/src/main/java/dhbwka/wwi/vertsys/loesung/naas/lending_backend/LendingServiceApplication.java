@@ -14,7 +14,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.web.filter.ForwardedHeaderFilter;
 
@@ -29,13 +31,15 @@ public class LendingServiceApplication {
     private static Logger logger = LoggerFactory.getLogger(LendingServiceApplication.class);
 
     public static void main(String[] args) {
-        SpringApplication.run(LendingServiceApplication.class, args);
+        ConfigurableApplicationContext ctx = SpringApplication.run(LendingServiceApplication.class, args);
+        ConfigurableEnvironment env = ctx.getEnvironment();
+        String port = env.getProperty("server.port");
 
         logger.info("");
         logger.info("");
         logger.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        logger.info(">>> Microservice: Ausleihe <<<");
-        logger.info(">>> http://localhost:8082/ <<<");
+        logger.info(">>> Microservice: Ausleihe");
+        logger.info(">>> http://localhost:" + port + "/");
         logger.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         logger.info("");
         logger.info("");

@@ -14,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
  * Hauptklasse der Anwendung. Die Anwendung besitzt sonst keinen weiteren Code,
@@ -32,14 +34,16 @@ public class NameserverApplication {
     private static Logger logger = LoggerFactory.getLogger(NameserverApplication.class);
     
     public static void main(String[] args) {
-        SpringApplication.run(NameserverApplication.class, args);
+        ConfigurableApplicationContext ctx = SpringApplication.run(NameserverApplication.class, args);
+        ConfigurableEnvironment env = ctx.getEnvironment();
+        String port = env.getProperty("server.port");
         
         logger.info("");
         logger.info("");
         logger.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        logger.info(">>> Zentraler Namensdienst zum Auffinden der anderen Microservices! <<<");
-        logger.info(">>> Die restlichen Services können nun gestartet werden.            <<<");
-        logger.info(">>> http://localhost:8761/                                          <<<");
+        logger.info(">>> Zentraler Namensdienst zum Auffinden der anderen Microservices!");
+        logger.info(">>> Die restlichen Services können nun gestartet werden.");
+        logger.info(">>> http://localhost:" + port + "/");
         logger.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         logger.info("");
         logger.info("");

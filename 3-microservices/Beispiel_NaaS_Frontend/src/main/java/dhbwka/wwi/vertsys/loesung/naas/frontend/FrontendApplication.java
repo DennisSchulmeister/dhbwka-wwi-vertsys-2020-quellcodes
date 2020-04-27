@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 /**
  * Hauptklasse der Anwendung.
@@ -23,13 +25,15 @@ public class FrontendApplication {
     private static Logger logger = LoggerFactory.getLogger(FrontendApplication.class);
     
     public static void main(String[] args) {
-        SpringApplication.run(FrontendApplication.class, args);
+        ConfigurableApplicationContext ctx = SpringApplication.run(FrontendApplication.class, args);
+        ConfigurableEnvironment env = ctx.getEnvironment();
+        String port = env.getProperty("server.port");
         
         logger.info("");
         logger.info("");
         logger.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        logger.info(">>> Frontend-Server der Web-Anwendung <<<");
-        logger.info(">>> http://localhost:8079/            <<<");
+        logger.info(">>> Frontend-Server der Web-Anwendung");
+        logger.info(">>> http://localhost:" + port + "/");
         logger.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         logger.info("");
         logger.info("");
