@@ -12,3 +12,5 @@ yarn-error.log
 **/tododb/
 
 
+.DS_Store
+.DS_Store?
