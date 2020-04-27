@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!--
+Copyright © 2020 Dennis Schulmeister-Zimolong
+
+E-Mail: dhbw@windows3.de
+Webseite: https://www.wpvs.de/
+
+Dieser Quellcode ist lizenziert unter einer
+Creative Commons Namensnennung 4.0 International Lizenz.
+-->
+<html>
+    <head>
+        <title>Beispiel: HTTP-Session in Spring</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h3>Warenkorb</h3>
+        
+        <form method="POST" action="cart">
+            Artikelnummer: <input name="id" type="number"/> <br>
+            Anzahl: <input name="amount" type="number"/> <br>
+            <input type="submit"/>
+        </form>
+        
+        <br>
+        <a href="cart">Inhalt des Warenkorb</a>
+    </body>
+</html>
