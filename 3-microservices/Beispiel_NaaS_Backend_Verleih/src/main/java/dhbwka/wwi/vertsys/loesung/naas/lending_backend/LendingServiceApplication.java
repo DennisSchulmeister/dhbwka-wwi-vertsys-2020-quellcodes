@@ -1,5 +1,5 @@
 /* 
- * Copyright © 2020 Dennis Schulmeister-Zimolong
+ * Copyri0ght © 2020 Dennis Schulmeister-Zimolong
  * 
  * E-Mail: dhbw@windows3.de
  * Webseite: https://www.wpvs.de/

@@ -37,6 +37,18 @@ public class GetGatewayUrlController {
     @GetMapping(value = "/api/gateway", produces = "text/plain")
     public String getGatewayUrl() {
         InstanceInfo instance = discoveryClient.getNextServerFromEureka(this.gatewayName, false);
-        return instance.getHomePageUrl();
+        String url = instance.getHomePageUrl();
+        
+        if (instance.isPortEnabled(InstanceInfo.PortType.SECURE)) {
+            // HTTPS-URL zurückgeben, wenn SSL aktiv ist. Einerseits ist das sicherer,
+            // andererseits laden die Browser heute keine unverschlüsselten Inhalte mehr,
+            // wenn die Seite selbst verschlüsselt geladen wurde. Beim Testen auf dem
+            // localhost fällt dies meistens nicht auf, wohl aber, wenn man die Anwendung
+            // produktiv setzt und das erste mal via HTTPS aufruft.
+            url = url.replace("http://", "https://");
+            url = url.replace(":" + instance.getPort(), ":" + instance.getSecurePort());
+        }
+        
+        return url;
     }
 }
