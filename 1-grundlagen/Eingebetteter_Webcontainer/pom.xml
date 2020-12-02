@@ -14,7 +14,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         
-        <jettyVersion>9.4.26.v20200117</jettyVersion>
+        <jettyVersion>9.4.35.v20201120</jettyVersion>
         <jtwigVersion>1.60</jtwigVersion>
         <pebbleVersion>2.1.0</pebbleVersion>
     </properties>
