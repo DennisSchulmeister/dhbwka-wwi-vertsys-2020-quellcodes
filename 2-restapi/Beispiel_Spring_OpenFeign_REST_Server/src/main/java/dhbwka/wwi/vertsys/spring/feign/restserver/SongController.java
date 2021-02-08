@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controller-Klasse des Beispiel-Webservices. Um das Beispiel nicht zu
- * kompliziert werden zu lassen, kann das Webservice einfach eine Liste von
+ * kompliziert werden zu lassen, kann der Webservice einfach eine Liste von
  * Songs temporär speichern. Clients können mit POST einen neuen Song
  * hinzufügen und mit GET die Liste abfragen.
  */
