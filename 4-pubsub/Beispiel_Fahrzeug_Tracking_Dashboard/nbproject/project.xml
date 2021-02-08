@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.web.clientproject</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/clientside-project/1">
+            <name>Beispiel_Fahrzeug_Tracking_Dashboard</name>
+        </data>
+        <libraries xmlns="http://www.netbeans.org/ns/cdnjs-libraries/1">
+            <library name="paho-mqtt" version="1.0.2">
+                <file localPath="public_html/libs/paho-mqtt/mqttws31.js" path="mqttws31.js"/>
+                <file localPath="public_html/libs/paho-mqtt/mqttws31.min.js" path="mqttws31.min.js"/>
+                <file localPath="public_html/libs/paho-mqtt/mqttws31.min.js.map" path="mqttws31.min.js.map"/>
+            </library>
+        </libraries>
+    </configuration>
+</project>

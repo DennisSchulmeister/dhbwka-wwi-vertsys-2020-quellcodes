@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<!--
+Copyright © 2018 Dennis Schulmeister-Zimolong
+
+E-Mail: dhbw@windows3.de
+Webseite: https://www.wpvs.de/
+
+Dieser Quellcode ist lizenziert unter einer
+Creative Commons Namensnennung 4.0 International Lizenz.
+-->
+<html>
+    <head>
+        <title>🚗 Fahrzeug-Dashboard (Lösung)</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Eclipse Paho -->
+        <script src="libs/paho-mqtt/mqttws31.js" type="text/javascript"></script>
+
+        <!-- OpenLayers (Debug-Version für besser verständliche Fehlermeldungen) -->
+        <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+        <script src="https://openlayers.org/en/v4.6.5/build/ol-debug.js"></script>
+
+        <!-- Eigene Sachen -->
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <!-- Karte -->
+        <div id="map" class="map"></div>
+
+        <!-- Overlay mit Verbindungsdaten -->
+        <div id="connection-overlay" class="overlay">
+            <input id="mqtt-address" type="text" placeholder="MQTT-Broker" aria-label="MQTT-Broker">
+            <div id="btn-connect" class="btn green" onclick="dashboard.connect()">Verbinden</div>
+            <div id="btn-disconnect" class="btn red" onclick="dashboard.disconnect()">Trennen</div>
+        </div>
+
+        <!-- Fahrzeugliste -->
+        <div id="vehicle-list" class="overlay"></div>
+
+        <div id="vehicle-template" class="hidden">
+            <div class="vehicle" id="vehicle-___ID___">
+                <table>
+                    <tr>
+                        <td class="label">
+                            Fahrzeug-ID:
+                        </td>
+                        <td>
+                            <a href="" onclick="dashboard.onVehicleClicked(event)" data-vehicle="___ID___">
+                                <span class="value-id"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">
+                            Koordinaten:
+                        </td>
+                        <td>
+                            <span class="value-latitude"></span>,
+                            <span class="value-longitude"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">
+                            Status:
+                        </td>
+                        <td>
+                            <span class="value-status"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">
+                            Drehzahl:
+                        </td>
+                        <td>
+                            <span class="value-gear"></span>. Gang,
+                            <span class="value-rpm"></span> rpm
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">
+                            Geschwindigkeit:
+                        </td>
+                        <td>
+                            <span class="value-kmh"></span> km/h
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <script>
+            /**
+             * Hauptklasse für unser schönes, kleines Dashboard. :-)
+             */
+            class VehicleDashboard {
+                /**
+                 * Konstruktor. Hier werden ein paar Werte vorbelegt.
+                 */
+                constructor() {
+                    this.initialAddress = "ws://localhost:8080/mqtt";
+                    this.topics = "VehicleTracking";
+
+                    this.addressInput = null;
+                    this.connectButton = null;
+                    this.disconnectButton = null;
+
+                    this.mqttClient = null;
+
+                    this.vehicleList = null;
+                    this.vehicleTemplate = "";
+                }
+
+                /**
+                 * Initialisierungen, nachdem die Seite geladen wurde
+                 */
+                onWindowLoad() {
+                    // Form-Elemente mit den Verbindungsdaten auslesen
+                    this.addressInput = document.getElementById("mqtt-address");
+                    this.connectButton = document.getElementById("btn-connect");
+                    this.disconnectButton = document.getElementById("btn-disconnect");
+
+                    // Formularfelder vorbelegen
+                    this.addressInput.value = this.initialAddress;
+                    this.onDisconnect();
+
+                    // Vectoren sind, was OpenLayers Marker auf der Karte nennt
+                    this.mapMarkerLayer = new ol.layer.Vector({
+                        source: new ol.source.Vector({})
+                    });
+
+                    // Karte initialisieren
+                    this.centerPoint = ol.proj.transform([8.385901, 49.026489], "EPSG:4326", "EPSG:3857");
+
+                    this.map = new ol.Map({
+                        layers: [
+                            new ol.layer.Tile({
+                                source: new ol.source.OSM()
+                            }),
+                            this.mapMarkerLayer
+                        ],
+                        target: 'map',
+                        view: new ol.View({
+                            center: this.centerPoint,
+                            zoom: 10
+                        })
+                    });
+
+                    // HTML-Template für Fahrzeugdaten
+                    this.vehicleList = document.getElementById("vehicle-list");
+                    this.vehicleTemplate = document.getElementById("vehicle-template").innerHTML;
+                }
+
+                /**
+                 * Verbindung herstellen.
+                 */
+                connect() {
+                    let clientId = "VTD-" + new Date().getTime();
+                    this.mqttClient = new Paho.MQTT.Client(this.addressInput.value, clientId);
+
+                    this.mqttClient.onConnected = () => this.onConnect();
+                    this.mqttClient.onConnectionLost = responseObject => this.onDisconnect(responseObject);
+                    this.mqttClient.onMessageArrived = message => this.onMessageArrived(message);
+
+                    let connectOptions = {
+                        onSuccess: () => this.onConnect(),
+                        onFailure: (ctx, code, message) => this.onDisconnect({
+                                errorCode: code,
+                                errorMessage: message
+                            })
+                    };
+
+                    this.mqttClient.connect(connectOptions);
+                }
+
+                /**
+                 * Verbindung trennen.
+                 */
+                disconnect() {
+                    if (this.mqtttClient !== null) {
+                        this.mqttClient.disconnect();
+                    }
+                }
+
+                /**
+                 * Der Verbindung steht. Alle Mann auf Gefechtstation!
+                 */
+                onConnect() {
+                    this.addressInput.disabled = true;
+                    this.connectButton.classList.add("hidden");
+                    this.disconnectButton.classList.remove("hidden");
+
+                    this.mqttClient.subscribe(this.topics + "/#");
+                }
+
+                /**
+                 * Die Verbindung wurde getrennt. Rühren, Soldat!
+                 * 
+                 * @param {Object] responseObject Objekt mit eventueller Fehlermeldung
+                 */
+                onDisconnect(responseObject) {
+                    if (responseObject && responseObject.errorCode !== 0) {
+                        console.log("Verbindung verloren: " + responseObject.errorMessage);
+                        alert(responseObject.errorMessage);
+                    }
+
+                    this.addressInput.disabled = false;
+                    this.connectButton.classList.remove("hidden");
+                    this.disconnectButton.classList.add("hidden");
+                }
+
+                /**
+                 * Eine Nachricht wurde empfangen. Daten in den Schaubildern
+                 * daher aktualisieren, um ihre Inhalte sichtbar zu machen.
+                 * 
+                 * @param {Object} mqttMessage Empfangene Nachricht
+                 */
+                onMessageArrived(mqttMessage) {
+                    let message = JSON.parse(mqttMessage.payloadString);
+
+                    // Anzeige aktualisieren
+                    switch (message.type) {
+                        case "VEHICLE_READY":
+                            this.addVehicle(message);
+                            break;
+                        case "CONNECTION_LOST":
+                            this.removeVehicle(message);
+                            break;
+                        case "SENSOR_DATA":
+                            this.updateVehicle(message);
+                            break;
+                    }
+                }
+
+                /**
+                 * Neues Fahrzeug der Anzeige hinzufügen.
+                 * @param {Object} message Empfangen Nachricht (deserialisiert)
+                 */
+                addVehicle(message) {
+                    // Eintrag in der Fahrzeugliste hinzufügen
+                    let html = this.vehicleTemplate.replace(/___ID___/g, message.vehicleId);
+                    this.vehicleList.innerHTML += html;
+
+                    // Marker auf der Karte platzieren
+                    let marker = new ol.Feature({
+                        geometry: new ol.geom.Point(this.centerPoint)
+                    });
+
+                    marker.setStyle(new ol.style.Style({
+                        image: new ol.style.Icon({
+                            anchor: [0.5, 1.2],
+                            anchorXUnits: "fraction",
+                            anchorYUnits: "fraction",
+                            opacity: 1,
+                            scale: 2,
+                            src: "marker.svg"
+                        }),
+                        text: new ol.style.Text({
+                            text: message.vehicleId,
+                            font: 'bold 28px "Open Sans", "Arial Unicode MS", "sans-serif"',
+                            fill: new ol.style.Fill({
+                                color: "black"
+                            }),
+                            stroke: new ol.style.Stroke({
+                                color: 'white', width: 2
+                            })
+                        })
+                    }));
+
+                    marker.setId(message.vehicleId);
+                    this.mapMarkerLayer.getSource().addFeature(marker);
+                }
+
+                /**
+                 * Fahrzeug aus der Anzeige entfernen.
+                 * @param {Object} message Empfangen Nachricht (deserialisiert)
+                 */
+                removeVehicle(message) {
+                    // Eintrag in der Fahrzeugliste entfernen
+                    let vehicleDiv = document.getElementById("vehicle-" + message.vehicleId);
+
+                    if (vehicleDiv) {
+                        vehicleDiv.parentNode.removeChild(vehicleDiv);
+                    }
+
+                    // Marker entfernen
+                    let marker = this.mapMarkerLayer.getSource().getFeatureById(message.vehicleId);
+
+                    if (marker) {
+                        this.mapMarkerLayer.getSource().removeFeature(marker);
+                    }
+                }
+
+                /**
+                 * Position und Statuswerte eines Fahrzeugs aktualisieren.
+                 * @param {Object} message Empfangen Nachricht (deserialisiert)
+                 */
+                updateVehicle(message) {
+                    // Sicherstellen, dass das Fahrzeug angezeigt wird
+                    let vehicleDiv = document.getElementById("vehicle-" + message.vehicleId);
+
+                    if (!vehicleDiv) {
+                        this.addVehicle(message);
+                        vehicleDiv = document.getElementById("vehicle-" + message.vehicleId);
+                    }
+
+                    // Eintrag in der Fahrzeugliste aktualisieren
+                    let idSpan = vehicleDiv.querySelector(".value-id");
+                    let latitudeSpan = vehicleDiv.querySelector(".value-latitude");
+                    let longitudeSpan = vehicleDiv.querySelector(".value-longitude");
+                    let statusSpan = vehicleDiv.querySelector(".value-status");
+                    let gearSpan = vehicleDiv.querySelector(".value-gear");
+                    let rpmSpan = vehicleDiv.querySelector(".value-rpm");
+                    let kmhSpan = vehicleDiv.querySelector(".value-kmh");
+
+                    idSpan.textContent = message.vehicleId;
+                    latitudeSpan.textContent = parseFloat(message.latitude).toFixed(5);
+                    longitudeSpan.textContent = parseFloat(message.longitude).toFixed(5);
+                    statusSpan.textContent = message.running ? "Fährt" : "Steht";
+                    gearSpan.textContent = message.gear;
+                    rpmSpan.textContent = parseFloat(message.rpm).toFixed(2);
+                    kmhSpan.textContent = parseFloat(message.kmh).toFixed(2);
+
+                    // Fahrzeug auf der Karte zeigen
+                    let marker = this.mapMarkerLayer.getSource().getFeatureById(message.vehicleId);
+
+                    if (marker) {
+                        let point = new ol.geom.Point(ol.proj.transform([message.longitude, message.latitude], "EPSG:4326", "EPSG:3857"));
+                        marker.setGeometry(point);
+                    }
+                }
+
+                /**
+                 * Bei Klick auf ein Fahrzeug das Fahrzeug auf der Karte zentrieren.
+                 * @param {DomEvent} event Click Event
+                 */
+                onVehicleClicked(event) {
+                    event.preventDefault();
+
+                    let link = event.target;
+
+                    while (link.tagName !== "A") {
+                        link = link.parentNode;
+                    }
+
+                    let vehicleId = link.dataset.vehicle;
+
+                    let marker = this.mapMarkerLayer.getSource().getFeatureById(vehicleId);
+
+                    if (!marker) {
+                        return;
+                    }
+
+                    let coordinates = marker.getGeometry().getCoordinates();
+                    let size = this.map.getSize();
+                    let position = [size[0] / 2, size[1] / 2];
+
+                    this.map.getView().centerOn(coordinates, size, position);
+                }
+            }
+
+            let dashboard = new VehicleDashboard();
+            window.addEventListener("load", () => dashboard.onWindowLoad());
+        </script>
+    </body>
+</html>

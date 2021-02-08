@@ -1,0 +1,125 @@
+/*
+Copyright © 2018 Dennis Schulmeister-Zimolong
+
+E-Mail: dhbw@windows3.de
+Webseite: https://www.wpvs.de/
+
+Dieser Quellcode ist lizenziert unter einer
+Creative Commons Namensnennung 4.0 International Lizenz.
+*/
+
+/* Allgemeines */
+html, body {
+    font-family: sans-serif;
+    font-size: 12pt;
+    margin: 0;
+    padding: 0;
+
+    height: 100%;
+}
+
+body {
+    position: relative;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Karte */
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.overlay {
+    padding: 0.5em;
+    border-radius: 0.33em;
+    
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+}
+
+.overlay a,
+.overlay a:visited {
+    color: #ff4444;
+}
+
+.overlay a:hover {
+    color: #ff9999;
+}
+
+/* Overlay mit Verbindungsdaten */
+/* Vgl. https://www.w3schools.com/howto/howto_css_outline_buttons.asp */
+#connection-overlay {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+#connection-overlay > * {
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.btn {
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    padding: 0.5em;
+    cursor: pointer;
+
+    display: inline-block;
+}
+
+.green {
+    border-color: #4CAF50;
+    color: green;
+}
+
+.green:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.red {
+    border-color: #f44336;
+    color: red
+}
+
+.red:hover {
+    background: #f44336;
+    color: white;
+}
+
+/* Fahrzeugliste */
+#vehicle-list {
+    position: absolute;
+    left: 1em;
+    right: 3em;
+    bottom: 1em;
+    
+    overflow: auto;
+}
+
+.vehicle {
+    display: inline-block;
+    
+    box-sizing: border-box;
+    padding: 0.5em;
+    
+    border: 0px solid rgba(255, 255, 255, 0.5);
+    border-right-width: 1px;
+}
+
+.vehicle:last-child {
+    border-right-width: 0px;
+}
+
+.label {
+    font-weight: bold;
+    padding-right: 1em;
+}
