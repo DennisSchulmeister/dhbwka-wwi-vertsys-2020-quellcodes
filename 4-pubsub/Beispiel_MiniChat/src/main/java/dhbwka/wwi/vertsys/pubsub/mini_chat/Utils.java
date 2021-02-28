@@ -33,7 +33,7 @@ public class Utils {
     }
     
     // Adresse des MQTT-Brokers und Namen der Topics
-    public static final String MQTT_BROKER_ADDRESS = "tcp://iot.eclipse.org:1883";
+    public static final String MQTT_BROKER_ADDRESS = "tcp://broker.hivemq.com:1883";
     public static final String MQTT_TOPIC_MINI_CHAT = "MiniChat";
 
     /**

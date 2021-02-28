@@ -24,7 +24,7 @@ public class Utils {
     public static final Logger LOGGER = Logger.getLogger(Utils.class.getName());
 
     // Adresse des MQTT-Brokers und Namen der Topics
-    public static final String MQTT_BROKER_ADDRESS = "tcp://localhost:1883"; // tcp://iot.eclipse.org:1883";
+    public static final String MQTT_BROKER_ADDRESS = "tcp://localhost:1883"; // tcp://broker.hivemq.com:1883";
     public static final String MQTT_TOPIC_NAME = "VehicleTracking";
 
     // Stream für Tastatureingaben
