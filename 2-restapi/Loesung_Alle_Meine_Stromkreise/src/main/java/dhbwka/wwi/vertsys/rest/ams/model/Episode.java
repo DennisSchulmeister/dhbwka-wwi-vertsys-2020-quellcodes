@@ -20,13 +20,17 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Entity-Klasse für eine Episode einer Serie.
  */
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Episode implements Serializable {
 
     @Id

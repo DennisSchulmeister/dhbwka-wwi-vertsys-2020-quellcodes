@@ -1,0 +1,83 @@
+/* 
+ * Copyright © 2020 Dennis Schulmeister-Zimolong
+ * 
+ * E-Mail: dhbw@windows3.de
+ * Webseite: https://www.wpvs.de/
+ * 
+ * Dieser Quellcode ist lizenziert unter einer
+ * Creative Commons Namensnennung 4.0 International Lizenz.
+ */
+
+/**
+ ** SEITE: STREAMING-DIENST AUSWÄHLEN
+ **/
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 2rem;
+    
+    --color1: grey;
+    --color2: lightgrey;
+}
+
+.jumbo {
+    font-size: 24pt;
+    font-weight: bold;
+    text-align: center;
+}
+
+.item {
+    margin: 1em;    
+    text-align: center;
+    color: var(--color1);
+}
+
+.item > img {
+    border: 3px solid var(--color1);
+    width: 7em;
+}
+
+.item:hover {
+    color: var(--color2);
+    cursor: pointer;
+}
+
+.item:hover > img {
+    border-color: var(--color2);
+}
+    
+@media (min-width: 40.0rem) {
+    /* Larger than mobile screen */
+    .jumbo {
+        font-size: 32pt;
+    }
+    
+    .item > img {
+        width: 8em;
+    }
+}
+
+@media (min-width: 80.0rem) {
+    /* Larger than tablet screen */
+    .jumbo {
+        font-size: 40pt;
+    }
+    
+    .item > img {
+        width: 10em;
+    }
+}
+
+@media (min-width: 120.0rem) {
+    /* Larger than desktop screen */
+    .jumbo {
+        font-size: 48pt;
+    }
+    
+    .item > img {
+        width: 11em;
+    }
+}

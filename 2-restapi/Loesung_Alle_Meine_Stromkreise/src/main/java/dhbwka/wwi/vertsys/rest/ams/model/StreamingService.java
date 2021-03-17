@@ -19,7 +19,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Entity-Klasse für einen Streamingdienst. Dies ist die oberste Entität, von
@@ -28,6 +30,8 @@ import lombok.Data;
  */
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class StreamingService implements Serializable {
 
     @Id

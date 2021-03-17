@@ -11,7 +11,7 @@
 	<groupId>dhbwka.wwi.vertsys.rest</groupId>
 	<artifactId>Loesung_Kino</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Lösung Kino</name>
+	<name>Lösung: Kino</name>
 	<description>Lösung zur Aufgabe 4 im REST-Foliensatz</description>
 
 	<properties>
