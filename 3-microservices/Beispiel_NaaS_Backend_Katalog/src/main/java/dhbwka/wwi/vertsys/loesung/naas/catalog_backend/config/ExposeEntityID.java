@@ -16,7 +16,7 @@ import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
-import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
+import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 
 /**
  * ID-Felder der Entities im REST-Webservice verfügbar machen. Die Autoren von
@@ -28,7 +28,7 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapt
  * Vgl. https://stackoverflow.com/a/47765828
  */
 @Configuration
-public class ExposeEntityID extends RepositoryRestConfigurerAdapter {
+public class ExposeEntityID implements RepositoryRestConfigurer {
 
     @Autowired
     private EntityManager entityManager;
