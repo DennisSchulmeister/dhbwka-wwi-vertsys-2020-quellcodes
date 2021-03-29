@@ -1,0 +1,65 @@
+#
+# Allgemeine Grundkonfiguration des Gateway-Servers
+# Vgl. https://www.devglan.com/spring-cloud/spring-cloud-gateway-example
+#
+spring.application.name: GCPLUS-GATEWAY
+server.port: 8090
+
+# AUFGABE: Adresse des Nameservers ergänzen
+eureka.client.serviceUrl.defaultZone:
+
+# AUFGABE: Adresse des Admin-Servers ergänzen
+spring.boot.admin.client.url:
+management.endpoints.web.exposure.include: "*"
+
+# Log-Einträge auf Platte sichern, damit diese über die Monitoring Webservices
+# abgerufen werden können und in der Admin-Oberfläche sichtbar sind
+logging.file.name: ${user.home}/gcplus-gateway.log
+
+# Konfiguration der URL-Weiterleitungen
+# Vgl. https://spring.io/projects/spring-cloud-gateway#learn
+#
+# Jede Regel besitzt eine ID, die sie kennzeichnet und im Feld `uri` eine
+# Zieladresse, an welche die Anfrage weitergeleitet wird. lb://xxx bedeutet
+# dabei, dass der Service im Nameserver nachgeschlagen wird. Mit `predicates`
+# können weitere Einschränkungen der gematchten HTTP-Anfragen vorgenommen
+# werden. Mit `filters` hingegen können die weitergeleiteten HTTP-Anfragen
+# umfangreich bearbeitet werden.
+#
+# AUFGABE: Die hart-codierten HTTP-Adressen hier durch logische Adressen der
+# Backend-Services im Namensdienst ersetzen.
+spring.cloud.gateway.routes:
+    # Backend: Golfplatz
+    - id: catalog_golfcourse
+      uri: http://localhost:8091
+      predicates:
+      - Path=/api/golfcourse/**
+      filters:
+      - RewritePath=/api/golfcourse/, /api/
+      
+    # Backend: Scorekarte
+    - id: lending_scorecard
+      uri: http://localhost:8092
+      predicates:
+      - Path=/api/scorecard/**
+      filters:
+      - RewritePath=/api/scorecard/, /api/
+      
+ # CORS-Konfiguration, um den Browsern den Aufruf des API-Gateways zu erlauben,
+ # egal unter welcher Adresse das Frontend läuft, welches per AJAX REST-Aufruf
+ # auf die Services zugreifen will.
+ #
+ # Vgl. https://javarubberduck.com/java/cors-gateway/
+spring.cloud.gateway.globalcors:
+    corsConfigurations:
+        '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+                - GET
+                - PUT
+                - POST
+                - PATCH
+                - DELETE
+                - OPTIONS
+                - HEAD
+    addToSimpleUrlHandlerMapping: true
