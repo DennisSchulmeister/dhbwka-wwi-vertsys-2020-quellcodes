@@ -29,14 +29,6 @@
             <artifactId>spring-boot-admin-starter-server</artifactId>
         </dependency>
 
-        <!-- Nameserver Client -->
-        <!--
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        -->
-
         <!-- Unit Test Framework -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
