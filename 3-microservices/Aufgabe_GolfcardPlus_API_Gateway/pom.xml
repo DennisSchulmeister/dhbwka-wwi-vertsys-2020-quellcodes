@@ -17,7 +17,7 @@
     <description>Aufgabe: Golfcard Plus (API-Gateway)</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
         <spring-cloud.version>2020.0.2</spring-cloud.version>
         <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
     </properties>
@@ -26,22 +26,22 @@
         AUFGABE: Die untensteheneden Abhängigkeiten für den Admin Dashboard Client
         und den Nameserver Client einkommentieren, sobald die beiden Server zur
         Verfügung stehen.
-    --> 
+    -->
     <dependencies>
         <!-- API-Gateway -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
-        
+
         <!-- Admin Dashboard Client -->
         <!--
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
         </dependency>
-        --> 
-               
+        -->
+
         <!-- Nameserver Client -->
         <!--
         <dependency>
@@ -49,13 +49,13 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         -->
-        
+
         <!-- Circuit Breaker -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
         </dependency>
-        
+
         <!-- Unit Test Framework -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -63,7 +63,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -82,7 +82,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    
+
     <build>
         <plugins>
             <plugin>

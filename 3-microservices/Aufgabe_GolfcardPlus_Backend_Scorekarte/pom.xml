@@ -17,7 +17,7 @@
     <description>Aufgabe: Golfcard Plus (Backend: Scorekarte)</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
         <spring-cloud.version>2020.0.2</spring-cloud.version>
         <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
     </properties>
@@ -26,26 +26,26 @@
         AUFGABE: Die untensteheneden Abhängigkeiten für den Admin Dashboard Client
         und den Nameserver Client einkommentieren, sobald die beiden Server zur
         Verfügung stehen.
-    --> 
+    -->
     <dependencies>
         <!-- Spring Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        
+
         <!-- Spring Data JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        
+
         <!-- Lombok: Getter und Setter für Java-Beans -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        
+
         <!-- Java Validation API -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -57,28 +57,28 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-rest-hal-explorer</artifactId>
         </dependency>
-        
-        <!-- Eingebettete HSQL-Datenbank -->        
+
+        <!-- Eingebettete HSQL-Datenbank -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
-        
+
         <!-- OpenFeign REST-Client -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        
+
         <!-- Admin Dashboard Client -->
         <!--
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
         </dependency>
-        --> 
-               
+        -->
+
         <!-- Nameserver Client -->
         <!--
         <dependency>
@@ -86,7 +86,7 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         -->
-        
+
         <!-- Unit Test Framework -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -113,7 +113,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    
+
     <build>
         <plugins>
             <plugin>

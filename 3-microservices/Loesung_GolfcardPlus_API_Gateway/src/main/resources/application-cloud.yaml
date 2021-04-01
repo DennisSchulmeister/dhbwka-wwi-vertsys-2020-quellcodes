@@ -1,0 +1,36 @@
+# Von der Cloudumgebung vorgegebene Portnummer, an welche der
+# externe Internettraffic geroutet wird
+server.port: ${PORT}
+
+# Externe Adresse des Namensdienstes
+eureka.client.serviceUrl.defaultZone: ${EUREKA_URL}/eureka
+
+# Externer Hostname und Portnummer, die im Namensdienst hinterlegt werden
+eureka.instance.hostname: ${APP_DOMAIN}
+eureka.instance.nonSecurePort: ${API_PORT_HTTP}
+eureka.instance.securePort: ${API_PORT_HTTPS}
+eureka.instance.securePortEnabled: ${API_USE_HTTPS}
+
+# Externe Adresse des Admin-Servers
+spring.boot.admin.client.url: ${ADMIN_URL}
+spring.boot.admin.client.instance.management-base-url: https://${APP_DOMAIN}
+spring.boot.admin.client.instance.service-base-url: ${spring.boot.admin.client.instance.management-base-url}
+#spring.boot.admin.client.username
+#spring.boot.admin.client.password
+
+spring.cloud.gateway.routes:
+    # Backend: Golfplatz
+    - id: catalog_golfcourse
+      uri: http://gcplus-golfcourse:8091
+      predicates:
+      - Path=/api/golfcourse/**
+      filters:
+      - RewritePath=/api/golfcourse/, /api/
+
+    # Backend: Scorekarte
+    - id: lending_scorecard
+      uri: http://gcplus-scorecard:8092
+      predicates:
+      - Path=/api/scorecard/**
+      filters:
+      - RewritePath=/api/scorecard/, /api/
