@@ -25,7 +25,7 @@ RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 # -----------------------------------------------------------------------------
 # Container 2: Anwendung ausführen
 # -----------------------------------------------------------------------------
-FROM openjdk:8-jre
+FROM openjdk:8-jre-slim
 VOLUME /tmp
 
 RUN addgroup --system app && adduser --system app; adduser app app

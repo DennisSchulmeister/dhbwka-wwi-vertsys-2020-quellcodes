@@ -14,7 +14,7 @@ INSERT INTO SONG (ARTIST, NAME, RELEASE_YEAR, SONGWRITERS) VALUES ('Dire Straits
 INSERT INTO SONG (ARTIST, NAME, RELEASE_YEAR, SONGWRITERS) VALUES ('Dire Straits', 'Calling Elvis', 1991, 'Mark Knopfler');
 INSERT INTO SONG (ARTIST, NAME, RELEASE_YEAR, SONGWRITERS) VALUES ('The Eagles', 'Tequila Sunrise', 1973, 'Don Henley, Glenn Frey');
 INSERT INTO SONG (ARTIST, NAME, RELEASE_YEAR, SONGWRITERS) VALUES ('The Eagles', 'Busy Being Fabulous', 2007, 'Don Henley, Glenn Frey');
-INSERT INTO SONG (ARTIST, NAME, RELEASE_YEAR, SONGWRITERS) VALUES ('O.M.D.', 'Walking On The Milkiway', 1996, 'McCluskey, Nigel Ipinson, Keith Small');
+INSERT INTO SONG (ARTIST, NAME, RELEASE_YEAR, SONGWRITERS) VALUES ('O.M.D.', 'Walking On The Milky Way', 1996, 'McCluskey, Nigel Ipinson, Keith Small');
 INSERT INTO SONG (ARTIST, NAME, RELEASE_YEAR, SONGWRITERS) VALUES ('Queen', 'I Want To Break Free', 1984, 'John Deacon');
 
 INSERT INTO PLAYLIST (NAME) VALUES ('The Golden 70s');
